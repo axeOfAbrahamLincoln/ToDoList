@@ -3,6 +3,7 @@ const { addToDoItem, listToDo, deleteToDoItem } = require("./todofunctions");
 const fs = require("fs");
 
 let Oper = ["add", "list", "delete", "exit"];
+let toDoList;
 
 try {
 	toDoList = fs.readFileSync("todolist.txt", "utf-8").split(",");
@@ -32,17 +33,17 @@ while (true) {
 		break;
 	}
 	if (OperationInput == "add") {
-		addToDoItem();
+		addToDoItem(toDoList);
 	}
 	if (OperationInput == "list") {
-		listToDo();
+		listToDo(toDoList);
 	}
 	if (OperationInput == "delete") {
 		if (toDoList.length == 0) {
 			console.log("no available items");
 			continue;
 		}
-		listToDo();
-		deleteToDoItem();
+		listToDo(toDoList);
+		deleteToDoItem(toDoList);
 	}
 }
